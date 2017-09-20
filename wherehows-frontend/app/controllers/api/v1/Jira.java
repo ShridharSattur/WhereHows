@@ -14,23 +14,25 @@
 package controllers.api.v1;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import dao.JiraDAO;
+import controllers.Application;
 import java.util.ArrayList;
 import java.util.List;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import wherehows.models.table.JiraTicket;
+import wherehows.dao.view.JiraViewDao;
 
 
 public class Jira extends Controller {
+  private static final JiraViewDao JIRA_VIEW_DAO = Application.DAO_FACTORY.getJiraViewDao();
   public static String HEADLESS_COMPONENT = "Auto Purge Program - Headless";
 
   public static Result getLdapInfo() {
     ObjectNode result = Json.newObject();
 
     result.put("status", "ok");
-    result.set("ldapinfo", Json.toJson(JiraDAO.getLdapInfo()));
+    result.set("ldapinfo", Json.toJson(JIRA_VIEW_DAO.getLdapInfo()));
     return ok(result);
   }
 
@@ -38,8 +40,8 @@ public class Jira extends Controller {
     ObjectNode result = Json.newObject();
 
     result.put("status", "ok");
-    result.set("currentUser", Json.toJson(JiraDAO.getCurrentUserLdapInfo(managerId)));
-    result.set("members", Json.toJson(JiraDAO.getFirstLevelLdapInfo(managerId)));
+    result.set("currentUser", Json.toJson(JIRA_VIEW_DAO.getCurrentUserLdapInfo(managerId)));
+    result.set("members", Json.toJson(JIRA_VIEW_DAO.getFirstLevelLdapInfo(managerId)));
     return ok(result);
   }
 
@@ -48,7 +50,7 @@ public class Jira extends Controller {
 
     List<JiraTicket> headlessTickets = new ArrayList<JiraTicket>();
     List<JiraTicket> userTickets = new ArrayList<JiraTicket>();
-    List<JiraTicket> tickets = JiraDAO.getUserTicketsByManagerId(managerId);
+    List<JiraTicket> tickets = JIRA_VIEW_DAO.getUserTicketsByManagerId(managerId);
     if (tickets != null && tickets.size() > 0) {
       for (JiraTicket ticket : tickets) {
         if (HEADLESS_COMPONENT.equalsIgnoreCase(ticket.getTicketComponent())) {

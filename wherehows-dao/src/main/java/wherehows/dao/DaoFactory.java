@@ -21,6 +21,7 @@ import wherehows.dao.table.DatasetsDao;
 import wherehows.dao.table.DictDatasetDao;
 import wherehows.dao.table.FieldDetailDao;
 import wherehows.dao.view.DatasetViewDao;
+import wherehows.dao.view.JiraViewDao;
 import wherehows.dao.view.OwnerViewDao;
 import wherehows.dao.view.FlowsViewDao;
 
@@ -56,6 +57,10 @@ public class DaoFactory {
 
   public FlowsViewDao getFlowViewDao() {
     return new FlowsViewDao(entityManagerFactory);
+  }
+
+  public JiraViewDao getJiraViewDao() {
+    return new JiraViewDao(entityManagerFactory);
   }
 
   public DictDatasetDao getDictDatasetDao() {
