@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.Git;
@@ -37,16 +37,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 /**
  * Created by abhattac on 2/5/15,
  * Modified by zechen on 12/8/15.
  */
-
+@Slf4j
 public class GitUtil {
-  private static final Logger logger = LoggerFactory.getLogger(GitUtil.class);
   private final static String DEFAULT_HOST = "gitli.corp.linkedin.com";
   public static final String HTTPS_PROTOCAL = "https";
   public static final String GIT_PROTOCAL = "git";
@@ -268,6 +266,5 @@ public class GitUtil {
       this.fileName = fileName;
     }
   }
-
 }
 
