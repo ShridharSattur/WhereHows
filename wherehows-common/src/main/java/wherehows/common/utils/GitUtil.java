@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.Git;
@@ -42,7 +43,7 @@ import org.jsoup.select.Elements;
  * Created by abhattac on 2/5/15,
  * Modified by zechen on 12/8/15.
  */
-
+@Slf4j
 public class GitUtil {
   private final static String DEFAULT_HOST = "gitli.corp.linkedin.com";
   public static final String HTTPS_PROTOCAL = "https";
